@@ -1,0 +1,35 @@
+---
+title: "VedicDateTime"
+author: "Alesia Tratsiakova"
+date: "2023-04-02"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+install.packages("VedicDateTime",repos = "http://cran.us.r-project.org")
+library(VedicDateTime)
+```
+
+## Easy - Time series
+
+Here are the examples of day vs. some variable plots.
+
+```{r}
+day1 <- gregorian_to_jd(1,1,2023)
+day2 <- gregorian_to_jd(1,1,2024)
+
+# Moon longitudes cycles for 2023
+days <- seq(day1,day2)
+moon_longitude <- sapply(X=days, FUN=moon_longitude)
+plot(days,moon_longitude)
+
+# Sunsets for 2023 in Dublin
+sunset <- sapply(X=days, FUN=sunset, place = c(53.35, -6.26, +1))
+plot(days,sunset[2,])
+
+# Lagna numbers for 2023
+lagna <- sapply(X=days, FUN=lagna)
+plot(days,lagna)
+```
+
